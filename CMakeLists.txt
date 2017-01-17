@@ -32,6 +32,7 @@ include(AddShellFunctionsTest)
 option(WITH_AUTOPATCH "Install autopatch hook" ON)
 option(WITH_FS_MANAGER "Install filesystem manager hook" ON)
 option(WITH_PACKAGE_ENV "Install per package environment manager" ON)
+option(WITH_ALIASES "Install various command aliases" ON)
 
 # Autopatch hook
 if(WITH_AUTOPATCH)
@@ -99,24 +100,28 @@ if(WITH_WORKDIR_TMPFS)
 endif()
 
 # Some other helpers...
-install(
-    FILES profile.d/00-make-completion-wrapper.sh profile.d/cave-aliases.sh
-    DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/profile.d"
-  )
-install(
-    FILES env.d/90cave
-    DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/env.d"
-  )
+if(WITH_ALIASES)
+    install(
+        FILES profile.d/00-make-completion-wrapper.sh profile.d/cave-aliases.sh
+        DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/profile.d"
+      )
+    install(
+        FILES env.d/90cave
+        DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/env.d"
+      )
+endif()
 
 if(PYTHONINTERP_FOUND)
     install(
         PROGRAMS print-ebuild-path
         DESTINATION "${CMAKE_INSTALL_FULL_LIBEXECDIR}/cave/commands"
       )
-    install(
-        FILES profile.d/cave-addons.sh
-        DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/profile.d"
-      )
+    if(WITH_ALIASES)
+        install(
+            FILES profile.d/cave-addons.sh
+            DESTINATION "${CMAKE_INSTALL_FULL_SYSCONFDIR}/profile.d"
+          )
+    endif()
 endif()
 
 # Docs (not much)
