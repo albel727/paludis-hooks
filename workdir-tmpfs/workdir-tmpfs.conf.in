@@ -1,6 +1,6 @@
 # Use in memory builds (default 'true').
 # Any other value than 'true' considered as 'false'.
-IN_MEMORY_BUILD_ENABLED=true
+IN_MEMORY_BUILD_ENABLED=false
 
 # Location of tmpfs dir
 # IN_MEMORY_BUILD_DIR="/dev/shm"
