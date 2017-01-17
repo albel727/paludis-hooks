@@ -2,6 +2,9 @@
 # Any other value than 'true' considered as 'false'.
 IN_MEMORY_BUILD_ENABLED=true
 
+# Location of tmpfs dir
+# IN_MEMORY_BUILD_DIR="/dev/shm"
+
 # Location of disk usage statistics file.
 # This file used to "predict" how much memory required
 # (and will be checked for availability) to build a package

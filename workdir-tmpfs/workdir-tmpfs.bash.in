@@ -16,6 +16,7 @@ MIN_RESERVED_SPACE=$(( 1024 * 1024 * 10 ))
 MAX_RESERVED_SPACE=$(( 1024 * 1024 * 100 ))
 DISK_USAGE_STATS_CACHE="@CMAKE_INSTALL_FULL_LOCALSTATEDIR@/cache/paludis/disk_usage_stats.cache"
 IN_MEMORY_BUILD_ENABLED=true
+IN_MEMORY_BUILD_DIR="/dev/shm"
 
 # Configuration override
 [ -f ${CONFIG_FILE} ] && source ${CONFIG_FILE}
@@ -31,7 +32,7 @@ if [ x"${PALUDIS_HOOK_DEBUG}" = 'xyes' ]; then
     env | sort >> /tmp/paludis-wdm-hook-env.log
 fi
 
-_wdm_shmbasedir="/dev/shm"
+_wdm_shmbasedir="$IN_MEMORY_BUILD_DIR"
 
 declare -r _B2H_PROGRAM=`cat <<_EOF
     {
