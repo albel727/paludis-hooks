@@ -67,6 +67,7 @@ try_to_apply_patches()
             else
                 einfo "No patches in for this package."
             fi
+            break
         fi
     done
 }
